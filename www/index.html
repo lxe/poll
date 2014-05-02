@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="poll">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" href="favicon.ico">
+
+    <title>Make a Poll</title>
+    <link href="//netdna.bootstrapcdn.com/bootswatch/3.1.1/flatly/bootstrap.min.css" rel="stylesheet">
+    <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/lib/loading-bar.min.css" rel="stylesheet">
+    <link href="/style.css" rel="stylesheet">
+  </head>
+
+  <body ng-controller="AppCtrl">
+
+    <div id="wrap">
+      <div id="content" class="clear-top">
+
+        <div class="navbar navbar-default" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <a class="navbar-brand" href=""><i class="fa fa-bar-chart-o"></i>&nbsp; {{ poll.question || 'Create A Poll'}}</a>
+            </div>  
+          </div>
+        </div>
+
+        <div class="main">
+          <div class="container" id="new-poll" ng-if="createNew">
+            <form role="form" ng-submit="createPoll()">
+              <div class="form-group">
+                <label for="poll-question">Question:</label>
+                <textarea class="form-control" id="poll-question" ng-model="poll.question"></textarea>
+              </div>
+              <div class="clearfix well">
+                <label for="choices">Choices:</label>
+                <ul class="list-unstyled choices" id="choices">
+                  <li ng-repeat="choice in poll.choices track by $index">
+                    <div class="form-group">
+                      <div class="input-group">
+                        <input type="text" class="form-control choice" id="poll-choice-{{$index}}" ng-model="poll.choices[$index]">
+                        <span class="input-group-btn">
+                          <button class="btn btn-danger" type="button" ng-click="poll.choices.splice($index, 1)">&times;</button>
+                        </span>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+                <button type="button" class="btn btn-success pull-right" ng-click="poll.choices.push('')">+ Add Choice</button>
+              </div>
+              <div class="row">
+                <div class="col-sm-4 col-sm-offset-8">
+                  <button type="submit" class="btn btn-lg btn-primary btn-block">Save Poll</button>
+                </div>
+              </div>
+            </form>
+          </div>
+
+          <div id="existing-poll" ng-if="!createNew">
+            <div class="container">
+              <form role="form" ng-submit="castVote()">
+                <ul class="list-unstyled choices" id="choices">
+                  <li class="select-choice" ng-repeat="choice in poll.choices track by $index">
+                    <div class="radio well">
+                      <label>
+                        <input ng-if="!$parent.$parent.voted" type="radio" name="result" id="choice-select-{{$index}}" value="{{$index}}" ng-model="$parent.$parent.selectedChoice"> {{ choice.text }}
+                        <div ng-if="voted" class="pull-right">{{ choice.votes.length }}</div>
+                      </label>
+                    </div>
+                  </li>
+                </ul>
+                {{ selectedChoice }}
+                <div class="row" ng-if="!voted">
+                  <div class="col-sm-4">
+                    <button type="submit" class="btn btn-lg btn-primary btn-block">Vote!</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+            <hr />
+            <div class="container">
+              <a href="/" class="btn btn-lg btn-success block-level">Create Your Own Poll!</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class="footer">
+      <div class="container">
+        <p>
+          Built with <i class="fa fa-heart"></i> by <a href="https://www.twitter.com/lxe">@lxe</a> using <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://nodejs.org/">Node</a>, and <a href="https://angularjs.org/">Angular</a>
+        </p>
+      </div>
+    </footer>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-animate.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.2.0-rc.3/angular-resource.min.js"></script>
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="/lib/loading-bar.min.js"></script>
+    <script src="/client.js"></script>
+  </body>
+</html>

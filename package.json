@@ -1,0 +1,18 @@
+{
+  "name": "poll",
+  "version": "0.0.0",
+  "description": "Poll",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha test"
+  },
+  "author": "Aleksey Smolenchuk",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.0.2",
+    "cookie-parser": "^1.0.1",
+    "cookie-session": "^1.0.1",
+    "express": "^4.1.0",
+    "mongoose": "^3.8.8"
+  }
+}
