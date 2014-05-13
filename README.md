@@ -1,7 +1,7 @@
-# Locations
+# Poll
 
-http://locations.lxe.co
-Manage favorite locations
+http://poll.lxe.co
+Create straw polls. Inspired by http://strawpoll.me/
 
 # Built With:
 
