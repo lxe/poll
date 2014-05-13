@@ -21,7 +21,10 @@
         <div class="navbar navbar-default" role="navigation">
           <div class="container">
             <div class="navbar-header">
-              <a class="navbar-brand" href=""><i class="fa fa-bar-chart-o"></i>&nbsp; {{ poll.question || 'Create A Poll'}}</a>
+              <a class="navbar-brand" href="">
+                <i class="fa fa-bar-chart-o"></i> &nbsp;
+                {{ createNew && 'Create A Poll' || poll.question }}
+              </a>
             </div>  
           </div>
         </div>
@@ -29,11 +32,11 @@
         <div class="main">
           <div class="container" id="new-poll" ng-if="createNew">
             <form role="form" ng-submit="createPoll()">
-              <div class="form-group">
-                <label for="poll-question">Question:</label>
-                <textarea class="form-control" id="poll-question" ng-model="poll.question"></textarea>
-              </div>
               <div class="clearfix well">
+                <div class="form-group">
+                  <label for="poll-question">Question:</label>
+                  <textarea class="form-control" id="poll-question" ng-model="poll.question" placeholder="How much wood would a woodchuck chuck if a woodchuck could chuck wood?"></textarea>
+                </div>
                 <label for="choices">Choices:</label>
                 <ul class="list-unstyled choices" id="choices">
                   <li ng-repeat="choice in poll.choices track by $index">
@@ -62,7 +65,7 @@
               <form role="form" ng-submit="castVote()">
                 <ul class="list-unstyled choices" id="choices">
                   <li class="select-choice" ng-repeat="choice in poll.choices track by $index">
-                    <div class="radio well">
+                    <div class="radio well {{ $parent.selectedChoice == $index && 'selected' }}">
                       <label>
                         <input ng-if="!$parent.$parent.voted" type="radio" name="result" id="choice-select-{{$index}}" value="{{$index}}" ng-model="$parent.$parent.selectedChoice"> {{ choice.text }}
                         <div ng-if="voted" class="pull-right">{{ choice.votes.length }}</div>
@@ -70,7 +73,6 @@
                     </div>
                   </li>
                 </ul>
-                {{ selectedChoice }}
                 <div class="row" ng-if="!voted">
                   <div class="col-sm-4">
                     <button type="submit" class="btn btn-lg btn-primary btn-block">Vote!</button>
@@ -89,7 +91,7 @@
     <footer class="footer">
       <div class="container">
         <p>
-          Built with <i class="fa fa-heart"></i> by <a href="https://www.twitter.com/lxe">@lxe</a> using <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://nodejs.org/">Node</a>, and <a href="https://angularjs.org/">Angular</a>
+          Built for fun by <a href="https://www.twitter.com/lxe">@lxe</a> using <a href="http://getbootstrap.com/">Bootstrap</a>, <a href="http://nodejs.org/">Node</a>, and <a href="https://angularjs.org/">Angular</a>
         </p>
       </div>
     </footer>

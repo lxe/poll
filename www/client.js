@@ -6,7 +6,7 @@ var app = angular.module('poll', [
 app.controller('AppCtrl', ['$scope', '$http',
   function AppCtrl($scope, $http) {
     $scope.poll = { choices : [ '' ] };
-    $scope.selectedChoice = '';
+    $scope.selectedChoice = NaN;
     $scope.voted = /voted=1/.test(document.cookie);
 
     if (location.pathname === '/') {

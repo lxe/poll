@@ -8,19 +8,20 @@ html, body {
 
 #content {
   overflow:auto;
-  padding-bottom:60px; /* this needs to be bigger than footer height*/
+  padding-bottom:80px; /* this needs to be bigger than footer height*/
 }
 
 .footer {
   position: relative;
   margin-top: -60px; /* negative value of footer height */
-  height: 60px;
+  min-height: 60px;
   clear:both;
   padding-top:20px;
   background-color: #ECF0F1;
 } 
 
 .footer p {
+  font-size: 80%;
   color: #555555;
 }
 
@@ -44,6 +45,11 @@ html, body {
   padding: 0;
 }
 
+.select-choice .well.selected {
+  background-color: #3498DB;
+  color: #ffffff;
+}
+
 .select-choice label {
   padding: 20px;
   padding-left: 40px;
@@ -53,5 +59,4 @@ html, body {
 
 .select-choice input {
   position: relative;
-  /*left: 20px;*/
 }
